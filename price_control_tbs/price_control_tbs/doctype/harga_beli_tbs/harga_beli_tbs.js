@@ -20,6 +20,15 @@ frappe.ui.form.on("Harga Beli TBS", {
     refresh(frm){
         frm.disable_save();
         frm.events.load_price_history(frm);
+
+        const grid = frm.fields_dict.price_change_history.grid;
+
+        grid.cannot_add_rows = true;
+        grid.wrapper.find('.grid-remove-rows').hide();
+        grid.wrapper.find('.row-check').hide();
+        grid.wrapper.find('.grid-add-row').hide();
+
+        grid.refresh();
     },
     item_code(frm) {
         if (!frm.doc.item_code) {

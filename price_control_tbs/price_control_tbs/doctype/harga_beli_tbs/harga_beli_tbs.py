@@ -39,9 +39,6 @@ def fetch_price_history(item_code, uom):
         "Item Price Ledger TBS",
         filters={
             "item_code": item_code,
-            # "unit": unit,
-            # "jarak": jarak,
-            # "supplier": supplier, 
             "uom": uom
         },
         fields=[
@@ -59,9 +56,9 @@ def fetch_price_history(item_code, uom):
             "approver",
             "jarak"
         ],
-        order_by="creation desc"
+        order_by="creation desc",
+        limit_page_length=100  
     )
-
 
     return [
         {
@@ -79,6 +76,7 @@ def fetch_price_history(item_code, uom):
         }
         for r in rows
     ]
+
 
 @frappe.whitelist()
 def get_current_price(item_code, uom, price_list=None, supplier=None):
